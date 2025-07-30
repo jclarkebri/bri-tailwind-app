@@ -45,12 +45,13 @@ export default function Results() {
       const start = i * 3;
       const values = [responses[start], responses[start + 1], responses[start + 2]];
       const avg = values.reduce((a, b) => a + b, 0) / 3;
-      dimensionScores.push(parseFloat(avg.toFixed(2)));
+      const score100 = Math.round(avg * 25); // Convert to 0-100 scale
+      dimensionScores.push(score100);
     }
 
     const totalAvg = dimensionScores.reduce((sum, score) => sum + score, 0) / dimensionScores.length;
 
-    const prs = 100 - totalAvg * 20;
+    const prs = 100 - totalAvg;
     let tier = "Low Risk";
     if (prs >= 70) tier = "High Risk";
     else if (prs >= 40) tier = "Moderate Risk";
@@ -64,7 +65,7 @@ export default function Results() {
     labels: DIMENSIONS,
     datasets: [
       {
-        label: "Behavioral Risk Scores",
+        label: "Behavioral Risk Scores (0-100)",
         data: scores,
         backgroundColor: "rgba(34, 197, 94, 0.2)",
         borderColor: "rgba(34, 197, 94, 1)",
@@ -114,7 +115,7 @@ export default function Results() {
           {DIMENSIONS.map((dim, idx) => (
             <li key={dim}>
               <span className="font-semibold text-gray-900">{dim}:</span> Score {" "}
-              <span className="text-gray-800">{scores[idx] ?? "–"}</span> / 4
+              <span className="text-gray-800">{scores[idx] ?? "–"}</span> / 100
             </li>
           ))}
         </ul>
