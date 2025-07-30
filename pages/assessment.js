@@ -91,38 +91,38 @@ export default function Assessment() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-8 text-center text-blue-800">
+    <div className="min-h-screen bg-black text-white px-6 py-12">
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-blue-400">
         Behavioral Risk Assessment
       </h1>
 
-      <p className="text-center text-gray-600 mb-4">
+      <p className="text-center text-gray-400 mb-10">
         {Object.keys(responses).length} of {questions.length * 3} answered
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-10">
         {questions.map((group, groupIndex) => (
           <section
             key={group.dimension}
-            className="border rounded-lg p-6 shadow-sm bg-white"
+            className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-md"
           >
-            <h2 className="text-2xl font-semibold mb-4 text-indigo-700">
+            <h2 className="text-2xl font-semibold mb-6 text-indigo-400">
               {group.dimension}
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-8">
               {group.items.map((q, i) => {
                 const index = groupIndex * 3 + i;
                 return (
                   <div key={index} className="flex flex-col">
-                    <label htmlFor={`q${index}`} className="mb-2 font-medium text-gray-800">
+                    <label htmlFor={`q${index}`} className="mb-3 font-medium text-gray-200">
                       {q}
                     </label>
-                    <div className="flex space-x-6 flex-wrap">
+                    <div className="flex flex-wrap gap-6">
                       {[0, 1, 2, 3, 4].map((score) => (
                         <label
                           key={score}
                           htmlFor={`q${index}-${score}`}
-                          className="flex items-center space-x-1 cursor-pointer select-none"
+                          className="flex items-center space-x-2 cursor-pointer select-none"
                         >
                           <input
                             id={`q${index}-${score}`}
@@ -131,9 +131,9 @@ export default function Assessment() {
                             value={score}
                             onChange={(e) => handleChange(index, e.target.value)}
                             required
-                            className="form-radio text-indigo-600"
+                            className="form-radio text-indigo-500 focus:ring-indigo-400"
                           />
-                          <span className="text-gray-700 text-sm">{scaleLabels[score]}</span>
+                          <span className="text-sm text-gray-300">{scaleLabels[score]}</span>
                         </label>
                       ))}
                     </div>
@@ -146,7 +146,7 @@ export default function Assessment() {
         <div className="text-center">
           <button
             type="submit"
-            className="mt-6 bg-indigo-600 text-white font-semibold py-3 px-8 rounded shadow hover:bg-indigo-700 transition"
+            className="mt-6 bg-indigo-600 text-white font-semibold py-3 px-10 rounded-lg shadow hover:bg-indigo-700 transition"
           >
             Submit Assessment
           </button>
