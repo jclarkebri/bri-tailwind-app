@@ -74,23 +74,27 @@ export default function Results() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded shadow-md">
-      <h1 className="text-4xl font-bold mb-6 text-center text-green-700">Assessment Results</h1>
+    <div className="max-w-4xl mx-auto p-8 bg-white rounded-2xl shadow-xl">
+      <h1 className="text-5xl font-bold mb-10 text-center text-green-700 drop-shadow-md">
+        Assessment Results
+      </h1>
 
-      <div className="text-center mb-8">
-        <p className="text-xl">
-          People Risk Score: {" "}
-          <span className="font-extrabold text-green-800">{peopleRiskScore} / 100</span>
+      <div className="bg-gray-100 rounded-xl p-6 mb-12 text-center shadow-md">
+        <p className="text-2xl font-medium text-gray-700 mb-3">
+          People Risk Score:
         </p>
-        <p className="text-lg mt-1">
+        <p className="text-6xl font-extrabold text-green-600 mb-2">
+          {peopleRiskScore} / 100
+        </p>
+        <p className="text-xl font-semibold">
           Risk Tier: {" "}
           <span
-            className={`font-semibold ${
+            className={`inline-block px-3 py-1 rounded-full text-white text-lg font-bold ${
               riskTier === "High Risk"
-                ? "text-red-600"
+                ? "bg-red-600"
                 : riskTier === "Moderate Risk"
-                ? "text-yellow-600"
-                : "text-green-600"
+                ? "bg-yellow-500"
+                : "bg-green-500"
             }`}
           >
             {riskTier}
@@ -98,19 +102,23 @@ export default function Results() {
         </p>
       </div>
 
-      <div className="max-w-lg mx-auto mb-12">
+      <div className="max-w-lg mx-auto mb-16">
         <Radar data={data} />
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Dimension Insights</h2>
-      <ul className="space-y-3 list-disc list-inside text-gray-700">
-        {DIMENSIONS.map((dim, idx) => (
-          <li key={dim}>
-            <span className="font-semibold text-gray-900">{dim}:</span> Score {" "}
-            <span className="text-gray-800">{scores[idx] ?? "–"}</span> / 4
-          </li>
-        ))}
-      </ul>
+      <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
+        <h2 className="text-3xl font-semibold mb-6 text-gray-800 border-b pb-3">
+          Dimension Insights
+        </h2>
+        <ul className="space-y-4 list-disc list-inside text-gray-700 text-lg">
+          {DIMENSIONS.map((dim, idx) => (
+            <li key={dim}>
+              <span className="font-semibold text-gray-900">{dim}:</span> Score {" "}
+              <span className="text-gray-800">{scores[idx] ?? "–"}</span> / 4
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
